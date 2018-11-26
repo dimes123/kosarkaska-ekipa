@@ -13,4 +13,4 @@ Baza bo hranila podatke o eni košarkaški ekipi, njihovih igralcih, njihovih to
 
 ##ER diagram
 
-![ER Diagram] (Kosarka.png)
+![ER Diagram](Kosarka.png)
