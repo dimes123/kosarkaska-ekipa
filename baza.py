@@ -6,12 +6,10 @@ def pobrisi_tabele(cur):
     """
     Pobriše tabele iz baze.
     """
-    cur.execute("DROP TABLE IF EXISTS pripada;")
-    cur.execute("DROP TABLE IF EXISTS nastopa;")
-    cur.execute("DROP TABLE IF EXISTS zanr;")
-    cur.execute("DROP TABLE IF EXISTS vloga;")
-    cur.execute("DROP TABLE IF EXISTS oseba;")
-    cur.execute("DROP TABLE IF EXISTS film;")
+    cur.execute("DROP TABLE IF EXISTS igralci;")
+    cur.execute("DROP TABLE IF EXISTS ekipe;")
+    cur.execute("DROP TABLE IF EXISTS tekme;")
+    cur.execute("DROP TABLE IF EXISTS statistika;")
 
 @commit
 def ustvari_tabele(cur):
@@ -19,28 +17,34 @@ def ustvari_tabele(cur):
     Ustvari tabele v bazi.
     """
     cur.execute("""
-        CREATE TABLE film (
-            id        INTEGER PRIMARY KEY,
-            naslov    TEXT,
-            dolzina   INTEGER,
-            leto      INTEGER,
-            ocena     REAL,
-            metascore INTEGER,
-            glasovi   INTEGER,
-            zasluzek  INTEGER,
-            opis      TEXT
+        CREATE TABLE igralci (
+            id              INTEGER PRIMARY KEY,
+            number          INTEGER,
+            name            INTEGER,
+            position        TEXT,
+            height          DOUBLE,
+            weight          DOUBLE,
+            year of birth   INTEGER
         );
     """)
     cur.execute("""
-        CREATE TABLE oseba (
-            id  INTEGER PRIMARY KEY,
-            ime TEXT
+        CREATE TABLE statistika (
+            ekipa     INTEGER REFERENCES ekipe(id),
+            player    TEXT,
+            played    BOOL,
+            points    INTEGER;
+            rebounds  INTEGER,
+            assists   INTEGER
         );
     """)
     cur.execute("""
-        CREATE TABLE vloga (
-            id    INTEGER PRIMARY KEY AUTOINCREMENT,
-            naziv TEXT
+        CREATE TABLE tekme (
+            id              INTEGER PRIMARY KEY AUTOINCREMENT,
+            date            DATE,
+            opponent        STRING,
+            outcome         STRING,
+            pointsteam      INTEGER,
+            pointsopponent  INTEGER
         );
     """)
     cur.execute("""
@@ -55,13 +59,6 @@ def ustvari_tabele(cur):
             oseba INTEGER REFERENCES oseba(id),
             vloga INTEGER REFERENCES vloga(id),
             PRIMARY KEY (film, oseba, vloga)
-        );
-    """)
-    cur.execute("""
-        CREATE TABLE pripada (
-            film INTEGER REFERENCES film(id),
-            zanr INTEGER REFERENCES zanr(id),
-            PRIMARY KEY (film, zanr)
         );
     """)
 
