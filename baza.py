@@ -35,8 +35,7 @@ def ustvari_tabele(cur):
     """)
     cur.execute("""
         CREATE TABLE statistika (
-            ekipa     INTEGER REFERENCES ekipe(id),
-            player    TEXT,
+            player    INTEGER REFERENCES igralci(number),
             played    BOOL,
             points    INTEGER;
             rebounds  INTEGER,
@@ -47,7 +46,7 @@ def ustvari_tabele(cur):
         CREATE TABLE tekme (
             id              INTEGER PRIMARY KEY,
             date            DATE,
-            opponent        STRING,
+            opponent        TEXT,
             outcome         STRING,
             pointsteam      INTEGER,
             pointsopponent  INTEGER
