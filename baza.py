@@ -18,13 +18,19 @@ def ustvari_tabele(cur):
     """
     cur.execute("""
         CREATE TABLE igralci (
-            id              INTEGER PRIMARY KEY,
-            number          INTEGER,
-            name            INTEGER,
+            number          INTEGER PRIMARY KEY,
+            name            TEXT,
             position        TEXT,
             height          DOUBLE,
             weight          DOUBLE,
             year of birth   INTEGER
+        );
+    """)
+    cur.execute("""
+        CREATE TABLE ekipe (
+            id         INTEGER PRIMARY KEY,
+            franchise  TEXT,
+            trainer    TEXT
         );
     """)
     cur.execute("""
@@ -39,26 +45,12 @@ def ustvari_tabele(cur):
     """)
     cur.execute("""
         CREATE TABLE tekme (
-            id              INTEGER PRIMARY KEY AUTOINCREMENT,
+            id              INTEGER PRIMARY KEY,
             date            DATE,
             opponent        STRING,
             outcome         STRING,
             pointsteam      INTEGER,
             pointsopponent  INTEGER
-        );
-    """)
-    cur.execute("""
-        CREATE TABLE zanr (
-            id    INTEGER PRIMARY KEY AUTOINCREMENT,
-            naziv TEXT
-        );
-    """)
-    cur.execute("""
-        CREATE TABLE nastopa (
-            film  INTEGER REFERENCES film(id),
-            oseba INTEGER REFERENCES oseba(id),
-            vloga INTEGER REFERENCES vloga(id),
-            PRIMARY KEY (film, oseba, vloga)
         );
     """)
 
