@@ -20,7 +20,7 @@ def ustvari_tabele(conn):
             position        TEXT,
             height          STRING,
             weight          INTEGER,
-            year of birth   INTEGER
+            year_of_birth   INTEGER
         );
     """)
     conn.execute("""
