@@ -1,6 +1,8 @@
 import sqlite3
+import baza
 
-conn = sqlite3.connect('filmi.db')
+conn = sqlite3.connect('kosarka.db')
+baza.ustvari_bazo_ce_ne_obstaja(conn)
 conn.execute('PRAGMA foreign_keys = ON')
 
 def commit(fun):

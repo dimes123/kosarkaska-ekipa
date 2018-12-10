@@ -1,22 +1,19 @@
 import csv
-from modeli import conn, commit
 
-@commit
-def pobrisi_tabele(cur):
+def pobrisi_tabele(conn):
     """
     Pobriše tabele iz baze.
     """
-    cur.execute("DROP TABLE IF EXISTS igralci;")
-    cur.execute("DROP TABLE IF EXISTS ekipe;")
-    cur.execute("DROP TABLE IF EXISTS tekme;")
-    cur.execute("DROP TABLE IF EXISTS statistika;")
+    conn.execute("DROP TABLE IF EXISTS statistika;")
+    conn.execute("DROP TABLE IF EXISTS tekme;")
+    conn.execute("DROP TABLE IF EXISTS ekipe;")
+    conn.execute("DROP TABLE IF EXISTS igralci;")
 
-@commit
-def ustvari_tabele(cur):
+def ustvari_tabele(conn):
     """
     Ustvari tabele v bazi.
     """
-    cur.execute("""
+    conn.execute("""
         CREATE TABLE igralci (
             number          INTEGER PRIMARY KEY,
             name            TEXT,
@@ -26,14 +23,14 @@ def ustvari_tabele(cur):
             year of birth   INTEGER
         );
     """)
-    cur.execute("""
+    conn.execute("""
         CREATE TABLE ekipe (
             tag        STRING PRIMARY KEY,
             trainer    TEXT,
             franchise  TEXT
         );
     """)
-    cur.execute("""
+    conn.execute("""
         CREATE TABLE tekme (
             date            DATE PRIMARY KEY,
             opponent        STRING REFERENCES ekipe(franchise),
@@ -42,7 +39,7 @@ def ustvari_tabele(cur):
             pointsopponent  INTEGER
         );
     """)
-        cur.execute("""
+    conn.execute("""
         CREATE TABLE statistika (
             playerREF    INTEGER REFERENCES igralci(number),
             dateREF      DATE REFERENCES tekme(date),
@@ -53,12 +50,12 @@ def ustvari_tabele(cur):
         );
     """)
 
-@commit
-def uvozi_igralci(cur):
+def uvozi_igralci(conn):
     """
     Uvozi podatke o igralcih.
     """
-    cur.execute("DELETE FROM igralci;")
+    conn.execute("DELETE FROM statistika;")
+    conn.execute("DELETE FROM igralci;")
     with open('Podatki/igralci.csv') as datoteka:
         podatki = csv.reader(datoteka)
         stolpci = next(podatki)
@@ -66,87 +63,68 @@ def uvozi_igralci(cur):
             INSERT INTO igralci VALUES ({})
         """.format(', '.join(["?"] * len(stolpci)))
         for vrstica in podatki:
-            cur.execute(poizvedba, vrstica)
+            conn.execute(poizvedba, vrstica)
 
-@commit
-def uvozi_ekipe(cur):
+def uvozi_ekipe(conn):
     """
-    Uvozi podatke o osebah.
+    Uvozi podatke o ekipah.
     """
-    cur.execute("DELETE FROM oseba;")
-    with open('podatki/oseba.csv') as datoteka:
+    conn.execute("DELETE FROM tekme;")
+    conn.execute("DELETE FROM ekipe;")
+    with open('podatki/ekipe.csv') as datoteka:
         podatki = csv.reader(datoteka)
         stolpci = next(podatki)
         poizvedba = """
-            INSERT INTO oseba VALUES ({})
+            INSERT INTO ekipe VALUES ({})
         """.format(', '.join(["?"] * len(stolpci)))
         for vrstica in podatki:
-            cur.execute(poizvedba, vrstica)
+            conn.execute(poizvedba, vrstica)
 
-@commit
-def uvozi_statistika(cur):
-    """
-    Uvozi podatke o vlogah.
-    """
-    cur.execute("DELETE FROM nastopa;")
-    cur.execute("DELETE FROM vloga;")
-    vloge = {}
-    with open('podatki/vloge.csv') as datoteka:
-        podatki = csv.reader(datoteka)
-        stolpci = next(podatki)
-        v = stolpci.index('vloga')
-        poizvedba = """
-            INSERT INTO nastopa VALUES ({})
-        """.format(', '.join(["?"] * len(stolpci)))
-        poizvedba_vloga = "INSERT INTO vloga (naziv) VALUES (?);"
-        for vrstica in podatki:
-            vloga = vrstica[v]
-            if vloga not in vloge:
-                cur.execute(poizvedba_vloga, [vloga])
-                vloge[vloga] = cur.lastrowid
-            vrstica[v] = vloge[vloga]
-            cur.execute(poizvedba, vrstica)
-
-@commit
-def uvozi_tekme (cur):
+def uvozi_tekme (conn):
     """
     Uvozi podatke o žanrih.
     """
-    cur.execute("DELETE FROM pripada;")
-    cur.execute("DELETE FROM zanr;")
-    zanri = {}
-    with open('podatki/zanri.csv') as datoteka:
+    conn.execute("DELETE FROM statistika;")
+    conn.execute("DELETE FROM tekme;")
+    with open('podatki/tekme.csv') as datoteka:
         podatki = csv.reader(datoteka)
         stolpci = next(podatki)
-        z = stolpci.index('zanr')
         poizvedba = """
-            INSERT INTO pripada VALUES ({})
+            INSERT INTO tekme VALUES ({})
         """.format(', '.join(["?"] * len(stolpci)))
-        poizvedba_zanr = "INSERT INTO zanr (naziv) VALUES (?);"
         for vrstica in podatki:
-            zanr = vrstica[z]
-            if zanr not in zanri:
-                cur.execute(poizvedba_zanr, [zanr])
-                zanri[zanr] = cur.lastrowid
-            vrstica[z] = zanri[zanr]
-            cur.execute(poizvedba, vrstica)
+            conn.execute(poizvedba, vrstica)
 
-@commit
-def ustvari_bazo(cur):
+def uvozi_statistika(conn):
+    """
+    Uvozi podatke o vlogah.
+    """
+    conn.execute("DELETE FROM statistika;")
+    with open('podatki/statistika.csv') as datoteka:
+        podatki = csv.reader(datoteka)
+        stolpci = next(podatki)
+        poizvedba = """
+            INSERT INTO statistika VALUES ({})
+        """.format(', '.join(["?"] * len(stolpci)))
+        for vrstica in podatki:
+            conn.execute(poizvedba, vrstica)
+
+def ustvari_bazo(conn):
     """
     Opravi celoten postopek postavitve baze.
     """
-    pobrisi_tabele.nocommit(cur)
-    ustvari_tabele.nocommit(cur)
-    uvozi_igralci.nocommit(cur)
-    uvozi_ekipe.nocommit(cur)
-    uvozi_statistika.nocommit(cur)
-    uvozi_tekme.nocommit(cur)
+    pobrisi_tabele(conn)
+    ustvari_tabele(conn)
+    uvozi_igralci(conn)
+    uvozi_ekipe(conn)
+    uvozi_tekme(conn)
+    uvozi_statistika(conn)
 
-def ustvari_bazo_ce_ne_obstaja():
+def ustvari_bazo_ce_ne_obstaja(conn):
     """
     Ustvari bazo, če ta še ne obstaja.
     """
-    cur = conn.execute("SELECT COUNT(*) FROM sqlite_master")
-    if cur.fetchone() == (0, ):
-        ustvari_bazo()
+    with conn:
+        conn = conn.execute("SELECT COUNT(*) FROM sqlite_master")
+        if conn.fetchone() == (0, ):
+            ustvari_bazo(conn)
