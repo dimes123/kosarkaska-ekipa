@@ -19,5 +19,4 @@ Baza bo hranila podatke o košarkaški ekipi Miami Heat, njihovih igralcih, njih
 
 
 ## ER diagram
-
 ![ER Diagram](Kosarka.png)
