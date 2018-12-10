@@ -1,14 +1,14 @@
-Trainer,Franchise
-Lloyd Pierce,Atlanta Hawks
-Brad Stevens,Boston Celtics
-Kenny Atkinson,Brooklyn Nets
-James Borrego,Charlotte Hornets
-Fred Hoiberg,Chicago Bulls
-Larry Drew,Cleveland Cavaliers
-Rick Carlisle,Dallas Mavericks
-Michael Malone,Denver Nuggets
-Dwane Casey,Detroit Pistons
-Steve Kerr Golden,State Warriors
+Trainer,Franchise,Tag
+Lloyd Pierce,Atlanta Hawks, ATL
+Brad Stevens,Boston Celtics, BOS
+Kenny Atkinson,Brooklyn Nets, BRK
+James Borrego,Charlotte Hornets, CHO
+Fred Hoiberg,Chicago Bulls, CHI
+Larry Drew,Cleveland Cavaliers, CLE
+Rick Carlisle,Dallas Mavericks, DAL
+Michael Malone,Denver Nuggets, DEN
+Dwane Casey,Detroit Pistons, DET
+Steve Kerr Golden,State Warriors, GSW
 Mike D'Antoni,Houston Rockets
 Nate McMillan,Indiana Pacers
 Doc Rivers,LA Clippers
