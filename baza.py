@@ -21,55 +21,55 @@ def ustvari_tabele(cur):
             number          INTEGER PRIMARY KEY,
             name            TEXT,
             position        TEXT,
-            height          DOUBLE,
-            weight          DOUBLE,
+            height          STRING,
+            weight          INTEGER,
             year of birth   INTEGER
         );
     """)
     cur.execute("""
         CREATE TABLE ekipe (
-            id         INTEGER PRIMARY KEY,
-            franchise  TEXT,
-            trainer    TEXT
-        );
-    """)
-    cur.execute("""
-        CREATE TABLE statistika (
-            player    INTEGER REFERENCES igralci(number),
-            played    BOOL,
-            points    INTEGER;
-            rebounds  INTEGER,
-            assists   INTEGER
+            tag        STRING PRIMARY KEY,
+            trainer    TEXT,
+            franchise  TEXT
         );
     """)
     cur.execute("""
         CREATE TABLE tekme (
-            id              INTEGER PRIMARY KEY,
-            date            DATE,
-            opponent        TEXT,
+            date            DATE PRIMARY KEY,
+            opponent        STRING REFERENCES ekipe(franchise),
             outcome         STRING,
             pointsteam      INTEGER,
             pointsopponent  INTEGER
         );
     """)
+        cur.execute("""
+        CREATE TABLE statistika (
+            playerREF    INTEGER REFERENCES igralci(number),
+            dateREF      DATE REFERENCES tekme(date),
+            rebounds     INTEGER,
+            assists      INTEGER,
+            steals       INTEGER,
+            points       INTEGER
+        );
+    """)
 
 @commit
-def uvozi_filme(cur):
+def uvozi_igralci(cur):
     """
-    Uvozi podatke o filmih.
+    Uvozi podatke o igralcih.
     """
-    cur.execute("DELETE FROM film;")
-    with open('podatki/film.csv') as datoteka:
+    cur.execute("DELETE FROM igralci;")
+    with open('Podatki/igralci.csv') as datoteka:
         podatki = csv.reader(datoteka)
         stolpci = next(podatki)
         poizvedba = """
-            INSERT INTO film VALUES ({})
+            INSERT INTO igralci VALUES ({})
         """.format(', '.join(["?"] * len(stolpci)))
         for vrstica in podatki:
             cur.execute(poizvedba, vrstica)
 
 @commit
-def uvozi_osebe(cur):
+def uvozi_ekipe(cur):
     """
     Uvozi podatke o osebah.
     """
@@ -84,7 +84,7 @@ def uvozi_osebe(cur):
             cur.execute(poizvedba, vrstica)
 
 @commit
-def uvozi_vloge(cur):
+def uvozi_statistika(cur):
     """
     Uvozi podatke o vlogah.
     """
@@ -108,7 +108,7 @@ def uvozi_vloge(cur):
             cur.execute(poizvedba, vrstica)
 
 @commit
-def uvozi_zanre(cur):
+def uvozi_tekme (cur):
     """
     Uvozi podatke o žanrih.
     """
@@ -138,10 +138,10 @@ def ustvari_bazo(cur):
     """
     pobrisi_tabele.nocommit(cur)
     ustvari_tabele.nocommit(cur)
-    uvozi_filme.nocommit(cur)
-    uvozi_osebe.nocommit(cur)
-    uvozi_vloge.nocommit(cur)
-    uvozi_zanre.nocommit(cur)
+    uvozi_igralci.nocommit(cur)
+    uvozi_ekipe.nocommit(cur)
+    uvozi_statistika.nocommit(cur)
+    uvozi_tekme.nocommit(cur)
 
 def ustvari_bazo_ce_ne_obstaja():
     """
