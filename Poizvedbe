@@ -1,0 +1,40 @@
+SELECT igralci.name
+  FROM igralci
+ WHERE igralci.number = (
+                            SELECT playerREF
+                              FROM statistika
+                                   JOIN
+                                   tekme ON statistika.dateREF = tekme.date
+                             WHERE tekme.opponent = 'Atlanta Hawks'
+                             ORDER BY rebounds DESC
+                        );
+
+SELECT DISTINCT tekme.opponent,
+                count( * ) / 9
+  FROM statistika
+       JOIN
+       tekme ON statistika.dateREF = tekme.date
+ GROUP BY tekme.opponent;
+
+SELECT date
+  FROM tekme
+ LIMIT 1 OFFSET 20;
+
+SELECT *
+  FROM statistika
+ WHERE statistika.dateREF = (
+                                SELECT date
+                                  FROM tekme
+                                 LIMIT 1 OFFSET 20
+                            );
+
+SELECT name
+  FROM igralci
+ WHERE number = 7;
+
+    SELECT opponent,
+           count( * ) 
+      FROM tekme
+     WHERE date > '2017-10-30' AND 
+           date < '2018-04-11'
+     GROUP BY opponent;

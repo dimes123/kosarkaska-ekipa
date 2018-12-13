@@ -23,7 +23,6 @@ def izberi_moznost(moznosti):
     else:
         for i, moznost in enumerate(moznosti, 1):
             print('{}){}'.format(i,moznost))
-        
         st_moznosti = len(moznosti)
         while True:
             izbira = input("Vnesite izbiro: ")
@@ -38,29 +37,59 @@ def izberi_moznost(moznosti):
                         st_moznosti))
 
 def prikazi_podatke_o_igralcu():
+    """
+    Prikaže podatke o določenem igralcu. Če podatka ni v bazi, izpiše napako.
+    """
     ime = input("Vnesi ime igralca: ")
     if not modeli.id_igralca(ime):
         print("Igralec s tem imenom ne obstaja")
     else:
         podatki = list(modeli.pridobi_podatke(ime))
-        #print(podatki[2])
         print("Št dresa: {0}, polno ime: {1}, pozicija: {2}, visina: {3}, teza: {4}, letnica rojstva: {5}".format(*podatki))
 
 def prikazi_podatke_najboljsi():
-    st = int(input("Vnesi zaporedno številko tekme (1-82): "))
-    if st<=0 or st > 82:
-        print("NAPAKA: Število je napačno!") 
+    """
+    Prikaže najboljše igralce v posamezni kategoriji proti določeni ekipi.
+    Glede na to, da proti eni ekipi se igra več kot 2x, uporabnika vprašamo 
+    naj izbere datum za katerega želi videti statistiko.
+    """
+    imeEkipe = input("Vnesi ime željene ekipe: ")
+    if modeli.ali_ekipa_obstaja(imeEkipe):
+        print("Ime ekipe je napačno!")
     else:
-        podatki = list(modeli.podatki_tekma(st))
-        print("{} je bila odigrna tekma proti ekipi {}.".format(*podatki))
-        najvec_tock = list(modeli.najvec_tock(podatki[0]))
-        najvec_podaj = list(modeli.najvec_podaj(podatki[0]))
-        najvec_skoki = list(modeli.najvec_skoki(podatki[0]))
-        najvec_ukradenih = list(modeli.najvec_ukradene(podatki[0]))
+        print("Proti ekipi {} je naša ekipa igrala na naslednjih datumih: ".format(imeEkipe))
+        seznamDatumov = modeli.poisci_datume(imeEkipe)
+        for i in range(len(seznamDatumov)):
+            print("{}) {}".format(i+1, seznamDatumov[i]))
+        st = int(input("Izberi datum, tako da izbereš število od 1 do {}: ".format(len(seznamDatumov))))
+        datum = seznamDatumov[st-1]
+        print("Na tekmi,ki je bila odigrana {} je statistika bila sledeča: ".format(datum))
+        najvec_tock = list(modeli.najvec_tock(datum))
+        najvec_podaj = list(modeli.najvec_podaj(datum))
+        najvec_skoki = list(modeli.najvec_skoki(datum))
+        najvec_ukradenih = list(modeli.najvec_ukradene(datum))
         print("Največ točk je imel {}: {}".format(modeli.ime_igralca(najvec_tock[0]),najvec_tock[1]))
         print("Največ skokov je imel {}: {}".format(modeli.ime_igralca(najvec_skoki[0]),najvec_skoki[1]))
         print("Največ podaj je imel {}: {}".format(modeli.ime_igralca(najvec_podaj[0]),najvec_podaj[1]))
         print("Največ ukradenih žog je imel {}: {}".format(modeli.ime_igralca(najvec_ukradenih[0]),najvec_ukradenih[1]))
+
+
+def tekme_med_datumi():
+    """
+    Prikaže tekme, ki jih je ekipa odigrala v določenem času.
+    """
+    print("NBA sezona traja od 2017-10-18 do 2018-04-11!")
+    zacetniDatum = input("Vnesi začetni datum v obliki YYYY-MM-DD: ")
+    koncniDatum = input("Vnesi končni datum v obliki YYYY-MM-DD: ")
+
+    podatki = modeli.tekme_v_obdobju(zacetniDatum, koncniDatum)    
+    for podatek in podatki:
+        print("Proti ekipi {} je naša ekipa igrala {} krat.".format(list(podatek)[0],list(podatek)[1]))
+    stZmag = list(modeli.stevilo_zmag(zacetniDatum, koncniDatum))[0]
+    stPorazov = list(modeli.stevilo_porazov(zacetniDatum, koncniDatum))[0]
+    print("V tem času je dosegla {} zmag in {} porazov.".format(stZmag, stPorazov))
+    
+    
 
 def pokazi_moznosti():
     print(50 * '-')
@@ -75,15 +104,13 @@ def pokazi_moznosti():
     elif izbira == 1:
         prikazi_podatke_najboljsi()
     elif izbira == 2:
-        dodaj_vlogo()
+        tekme_med_datumi()
     else:
         print('Nasvidenje!')
         exit()
-    
-
 
 def main():
-    print('Pozdravljeni v bazi najboljših filmov!')
+    print('Pozdravljeni v bazi košarkarske ekipe!')
     while True:
         pokazi_moznosti()
 

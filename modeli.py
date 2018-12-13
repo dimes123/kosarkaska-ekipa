@@ -39,14 +39,20 @@ def ime_igralca(st):
     """
     return  ''.join(conn.execute("SELECT name FROM igralci WHERE number = ?",[st]).fetchone())
 
-def podatki_tekma(st):
-    """
-    Vrne datum in nasportnik za zaporedno številko tekme
-    """
-    
-    return conn.execute("SELECT date,opponent FROM tekme LIMIT 1 OFFSET ?",[st]).fetchone()
 
-#def najvec
+def ali_ekipa_obstaja(imeNasprotnika):
+    """
+    Preveri ali dana ekipa obstaja
+    """
+    return conn.execute("SELECT franchise FROM ekipe WHERE franchise = ?",[imeNasprotnika]).fetchone() is None
+
+def poisci_datume(imeNasprotnika):
+    """
+    Poišče vse datume, ko je naša  ekipa igrala proti nasprotniku imeNasprotnika
+    """
+    rez = conn.execute("SELECT date FROM tekme WHERE tekme.opponent = ?",[imeNasprotnika]).fetchall()
+    #Pretvorimo dobljene podatke v seznam
+    return [podatek[0] for podatek in rez]
 
 def pridobi_podatke(igralec):
     """
@@ -82,3 +88,32 @@ def najvec_ukradene(datum):
     """
     return conn.execute("SELECT playerRef, max(steals) FROM statistika WHERE statistika.dateREF = ?",[datum]).fetchone()
 
+
+def tekme_v_obdobju(zacDatum, konDatum):
+    """
+    Vrne seznam tekm, ki jih je ekipa odigrala med dvema datumoma
+    """
+    rez = conn.execute("""SELECT opponent,count(opponent) FROM tekme 
+                        WHERE date >= ? AND date <= ?
+                        GROUP BY opponent""",[zacDatum, konDatum]).fetchall()
+    return rez
+
+def stevilo_zmag(zacDatum, konDatum):
+    """
+    Vrne število zmag ekipe v določenem času
+    """
+    return conn.execute("""SELECT count(outcome) FROM tekme
+                        WHERE date >= ? AND 
+                        date <= ? AND 
+                        outcome = 'W'
+                        """,[zacDatum, konDatum]).fetchone()
+
+def stevilo_porazov(zacDatum, konDatum):
+    """
+    Vrne število porazov ekipe v določenem času
+    """
+    return conn.execute("""SELECT count(outcome) FROM tekme
+                        WHERE date >= ? AND 
+                        date <= ? AND 
+                        outcome = 'L'
+                        """,[zacDatum, konDatum]).fetchone()
