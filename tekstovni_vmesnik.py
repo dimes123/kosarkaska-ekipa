@@ -41,11 +41,14 @@ def prikazi_podatke_o_igralcu():
     Prikaže podatke o določenem igralcu. Če podatka ni v bazi, izpiše napako.
     """
     ime = input("Vnesi ime igralca: ")
-    if not modeli.id_igralca(ime):
-        print("Igralec s tem imenom ne obstaja")
+    while not modeli.id_igralca(ime):
+        ime = input("Igralec s tem imenom ne obstaja. Vnesi pravo ime:")
     else:
         podatki = list(modeli.pridobi_podatke(ime))
-        print("Št dresa: {0}, polno ime: {1}, pozicija: {2}, visina: {3}, teza: {4}, letnica rojstva: {5}".format(*podatki))
+        print("\nŠt dresa: {0}, polno ime: {1}, pozicija: {2}, visina: {3}, teza: {4}, letnica rojstva: {5}\n".format(*podatki))
+        st = False
+        while not st:
+            st = input('Za nazaj napisi "True":')
 
 def prikazi_podatke_najboljsi():
     """
@@ -54,8 +57,8 @@ def prikazi_podatke_najboljsi():
     naj izbere datum za katerega želi videti statistiko.
     """
     imeEkipe = input("Vnesi ime željene ekipe: ")
-    if modeli.ali_ekipa_obstaja(imeEkipe):
-        print("Ime ekipe je napačno!")
+    while modeli.ali_ekipa_obstaja(imeEkipe):
+        imeEkipe = input("Ime ekipe je napačno! Vnesi pravilnega:")
     else:
         print("Proti ekipi {} je naša ekipa igrala na naslednjih datumih: ".format(imeEkipe))
         seznamDatumov = modeli.poisci_datume(imeEkipe)
@@ -63,7 +66,7 @@ def prikazi_podatke_najboljsi():
             print("{}) {}".format(i+1, seznamDatumov[i]))
         st = int(input("Izberi datum, tako da izbereš število od 1 do {}: ".format(len(seznamDatumov))))
         datum = seznamDatumov[st-1]
-        print("Na tekmi,ki je bila odigrana {} je statistika bila sledeča: ".format(datum))
+        print("\nNa tekmi,ki je bila odigrana {} je statistika bila sledeča: ".format(datum))
         najvec_tock = list(modeli.najvec_tock(datum))
         najvec_podaj = list(modeli.najvec_podaj(datum))
         najvec_skoki = list(modeli.najvec_skoki(datum))
@@ -71,23 +74,30 @@ def prikazi_podatke_najboljsi():
         print("Največ točk je imel {}: {}".format(modeli.ime_igralca(najvec_tock[0]),najvec_tock[1]))
         print("Največ skokov je imel {}: {}".format(modeli.ime_igralca(najvec_skoki[0]),najvec_skoki[1]))
         print("Največ podaj je imel {}: {}".format(modeli.ime_igralca(najvec_podaj[0]),najvec_podaj[1]))
-        print("Največ ukradenih žog je imel {}: {}".format(modeli.ime_igralca(najvec_ukradenih[0]),najvec_ukradenih[1]))
+        print("Največ ukradenih žog je imel {}: {}\n".format(modeli.ime_igralca(najvec_ukradenih[0]),najvec_ukradenih[1]))
 
+        st = False
+        while not st:
+            st = input('Za nazaj napisi "True":')
 
 def tekme_med_datumi():
     """
     Prikaže tekme, ki jih je ekipa odigrala v določenem času.
     """
-    print("NBA sezona traja od 2017-10-18 do 2018-04-11!")
+    print("NBA sezona traja od 2017-10-18 do 2018-04-11!\n")
     zacetniDatum = input("Vnesi začetni datum v obliki YYYY-MM-DD: ")
     koncniDatum = input("Vnesi končni datum v obliki YYYY-MM-DD: ")
+
 
     podatki = modeli.tekme_v_obdobju(zacetniDatum, koncniDatum)    
     for podatek in podatki:
         print("Proti ekipi {} je naša ekipa igrala {} krat.".format(list(podatek)[0],list(podatek)[1]))
     stZmag = list(modeli.stevilo_zmag(zacetniDatum, koncniDatum))[0]
     stPorazov = list(modeli.stevilo_porazov(zacetniDatum, koncniDatum))[0]
-    print("V tem času je dosegla {} zmag in {} porazov.".format(stZmag, stPorazov))
+    print("\nV tem času je dosegla {} zmag in {} porazov.".format(stZmag, stPorazov))
+    st = False
+    while not st:
+        st = input('Za nazaj napisi "True":')
     
     
 
