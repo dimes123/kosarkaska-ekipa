@@ -46,9 +46,6 @@ def prikazi_podatke_o_igralcu():
     else:
         podatki = list(modeli.pridobi_podatke(ime))
         print("\nŠt dresa: {0}, polno ime: {1}, pozicija: {2}, visina: {3}, teza: {4}, letnica rojstva: {5}\n".format(*podatki))
-        st = False
-        while not st:
-            st = input('Za nazaj napisi "True":')
 
 def prikazi_podatke_najboljsi():
     """
@@ -76,10 +73,6 @@ def prikazi_podatke_najboljsi():
         print("Največ podaj je imel {}: {}".format(modeli.ime_igralca(najvec_podaj[0]),najvec_podaj[1]))
         print("Največ ukradenih žog je imel {}: {}\n".format(modeli.ime_igralca(najvec_ukradenih[0]),najvec_ukradenih[1]))
 
-        st = False
-        while not st:
-            st = input('Za nazaj napisi "True":')
-
 def tekme_med_datumi():
     """
     Prikaže tekme, ki jih je ekipa odigrala v določenem času.
@@ -95,9 +88,6 @@ def tekme_med_datumi():
     stZmag = list(modeli.stevilo_zmag(zacetniDatum, koncniDatum))[0]
     stPorazov = list(modeli.stevilo_porazov(zacetniDatum, koncniDatum))[0]
     print("\nV tem času je dosegla {} zmag in {} porazov.".format(stZmag, stPorazov))
-    st = False
-    while not st:
-        st = input('Za nazaj napisi "True":')
     
     
 
@@ -111,10 +101,13 @@ def pokazi_moznosti():
     ])
     if izbira == 0:
         prikazi_podatke_o_igralcu()
+        nazaj()
     elif izbira == 1:
         prikazi_podatke_najboljsi()
+        nazaj()
     elif izbira == 2:
         tekme_med_datumi()
+        nazaj()
     else:
         print('Nasvidenje!')
         exit()
@@ -124,4 +117,11 @@ def main():
     while True:
         pokazi_moznosti()
 
+def nazaj():
+    """
+    Funkcija naredi, da se po uporabnikovi uspešni poizvedbi ne vrnemo takoj na poizvedovanje
+    """
+    st = False
+    while not st:
+        st = input('Za nazaj napisi "True":')
 main()
