@@ -1,4 +1,5 @@
 import modeli
+import datetime
 
 def izberi_moznost(moznosti):
     """
@@ -80,16 +81,39 @@ def tekme_med_datumi():
     print("NBA sezona traja od 2017-10-18 do 2018-04-11!\n")
     zacetniDatum = input("Vnesi začetni datum v obliki YYYY-MM-DD: ")
     koncniDatum = input("Vnesi končni datum v obliki YYYY-MM-DD: ")
+    print(preveri(zacetniDatum, koncniDatum))
+
+    if preveri(zacetniDatum, koncniDatum):
+        podatki = modeli.tekme_v_obdobju(zacetniDatum, koncniDatum)    
+        for podatek in podatki:
+            print("Proti ekipi {} je naša ekipa igrala {} krat.".format(list(podatek)[0],list(podatek)[1]))
+        stZmag = list(modeli.stevilo_zmag(zacetniDatum, koncniDatum))[0]
+        stPorazov = list(modeli.stevilo_porazov(zacetniDatum, koncniDatum))[0]
+        print("\nV tem času je dosegla {} zmag in {} porazov.\n".format(stZmag, stPorazov))
+    else:
+        print("\nNapisal si napačen datum!\n")
+        tekme_med_datumi()
 
 
-    podatki = modeli.tekme_v_obdobju(zacetniDatum, koncniDatum)    
-    for podatek in podatki:
-        print("Proti ekipi {} je naša ekipa igrala {} krat.".format(list(podatek)[0],list(podatek)[1]))
-    stZmag = list(modeli.stevilo_zmag(zacetniDatum, koncniDatum))[0]
-    stPorazov = list(modeli.stevilo_porazov(zacetniDatum, koncniDatum))[0]
-    print("\nV tem času je dosegla {} zmag in {} porazov.".format(stZmag, stPorazov))
-    
-    
+def preveri(zacDat, koncDat):
+    """
+    Preveri ali sta dana datuma pravilna.
+    """
+    try:
+        l1, m1, d1 = zacDat.split("-")
+        l2, m2, d2 = koncDat.split("-")
+        datum1 = datetime.datetime(int(l1),int(m1),int(d1))
+        datum2 = datetime.datetime(int(l2),int(m2),int(d2))
+        if datum2 < datum1:
+            return False
+    except:
+        return False
+    return True
+
+
+
+
+
 
 def pokazi_moznosti():
     print(50 * '-')
@@ -121,7 +145,6 @@ def nazaj():
     """
     Funkcija naredi, da se po uporabnikovi uspešni poizvedbi ne vrnemo takoj na poizvedovanje
     """
-    st = False
-    while not st:
-        st = input('Za nazaj napisi "True":')
+    input("Pritisni Enter za nadaljevanje!")
+        
 main()
