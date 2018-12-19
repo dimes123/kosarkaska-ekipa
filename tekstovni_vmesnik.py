@@ -81,7 +81,6 @@ def tekme_med_datumi():
     print("NBA sezona traja od 2017-10-18 do 2018-04-11!\n")
     zacetniDatum = input("Vnesi začetni datum v obliki YYYY-MM-DD: ")
     koncniDatum = input("Vnesi končni datum v obliki YYYY-MM-DD: ")
-    print(preveri(zacetniDatum, koncniDatum))
 
     if preveri(zacetniDatum, koncniDatum):
         podatki = modeli.tekme_v_obdobju(zacetniDatum, koncniDatum)    
