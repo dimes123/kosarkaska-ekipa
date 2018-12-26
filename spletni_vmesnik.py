@@ -1,10 +1,31 @@
-import bottle
-from bottle import route, run, template
+from bottle import route, run, template, get
 import modeli
 
-@route('/')
-@route('/hello/<name>')
-def greet(name='Stranger'):
-    return template('Hello {{name}}, how are you?', name=name)
+@get('/')
+def glavna_stran():
+    (st_tekem,) = modeli.stevilo_tekem()
+    (st_igralcev,) = modeli.stevilo_igralcev()
+    return template('glavna_stran',
+                    st_tekem = st_tekem,
+                    st_igralcev = st_igralcev
+                    )
+
+@get('/igralci/')
+def igralci():
+    vsi = modeli.igralci_vsi()
+    return template('igralci',
+                     igralci = vsi
+                     )
+
+@get('/igralci/<name>/')
+def igralec(name):
+    podatki_o_igralcu = modeli.pridobi_podatke(name)
+    seznam_tekem = modeli.seznam_tekem(name)
+    print(podatki_o_igralcu, seznam_tekem)
+    return template('igralci',
+                     podatki_o_igralcu = podatki_o_igralcu,
+                     seznam_tekem = seznam_tekem
+                     )
+
 
 run(host='localhost', port=8080, reloader=True, debug=True)

@@ -117,3 +117,30 @@ def stevilo_porazov(zacDatum, konDatum):
                         date <= ? AND 
                         outcome = 'L'
                         """,[zacDatum, konDatum]).fetchone()
+
+def stevilo_igralcev():
+    """
+    Vrne število vseh igralcev, ki so igrali v Miami Heat v sezoni 2017-2018
+    """
+    return conn.execute("""SELECT count(*) FROM igralci""").fetchone()
+
+def stevilo_tekem():
+    """
+    Vrne število vseh igralcev, ki so igrali v Miami Heat v sezoni 2017-2018
+    """
+    return conn.execute("""SELECT count(*) FROM tekme""").fetchone()
+
+def igralci_vsi():
+    """
+    Vrne seznam vseh igralcev, ki so igrali v Miami Heat v sezoni 2017-2018
+    """
+    return conn.execute("""SELECT number, name, position FROM igralci""").fetchall()
+
+def seznam_tekem(name):
+    """
+    Vrne seznam vseh tekem, na katerih je ta igralec igral
+    """
+    return conn.execute("""SELECT * FROM statistika 
+                            JOIN igralci ON playerREF = number
+                           WHERE name = ?
+                        """, [name]).fetchall()
