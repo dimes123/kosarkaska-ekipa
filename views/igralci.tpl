@@ -6,7 +6,7 @@
 <ol>
     % for number, name, position in igralci: 
         <li>
-            <a href ="/igralci/{{ name }}/">
+            <a href ="/igralci/{{ number }}/">
                 {{ name }} ({{ number }}.) <small>{{ position }}</small> 
             </a>
         </li>

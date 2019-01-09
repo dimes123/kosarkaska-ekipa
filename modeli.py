@@ -58,7 +58,7 @@ def pridobi_podatke(igralec):
     """
     Vrne podatke o igralcu. Vemo zagotovo, da je igralec v ekipi
     """
-    return conn.execute("SELECT * FROM igralci WHERE igralci.name = ?",[igralec]).fetchone()
+    return conn.execute("SELECT * FROM igralci WHERE igralci.number = ?",[igralec]).fetchone()
 
 def najvec_tock(datum):
     """
@@ -136,11 +136,11 @@ def igralci_vsi():
     """
     return conn.execute("""SELECT number, name, position FROM igralci""").fetchall()
 
-def seznam_tekem(name):
+def seznam_tekem(id):
     """
     Vrne seznam vseh tekem, na katerih je ta igralec igral
     """
     return conn.execute("""SELECT * FROM statistika 
                             JOIN igralci ON playerREF = number
-                           WHERE name = ?
-                        """, [name]).fetchall()
+                           WHERE number = ?
+                        """, [id]).fetchall()
