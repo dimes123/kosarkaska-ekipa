@@ -54,11 +54,11 @@ def poisci_datume(imeNasprotnika):
     #Pretvorimo dobljene podatke v seznam
     return [podatek[0] for podatek in rez]
 
-def pridobi_podatke(igralec):
+def pridobi_podatke(id):
     """
     Vrne podatke o igralcu. Vemo zagotovo, da je igralec v ekipi
     """
-    return conn.execute("SELECT * FROM igralci WHERE igralci.number = ?",[igralec]).fetchone()
+    return conn.execute("SELECT * FROM igralci WHERE igralci.number = ?",[id]).fetchone()
 
 def najvec_tock(datum):
     """
@@ -140,7 +140,7 @@ def seznam_tekem(id):
     """
     Vrne seznam vseh tekem, na katerih je ta igralec igral
     """
-    return conn.execute("""SELECT * FROM statistika 
-                            JOIN igralci ON playerREF = number
+    return conn.execute("""SELECT * FROM igralci 
+                            JOIN statistika ON playerREF = number
                            WHERE number = ?
                         """, [id]).fetchall()
