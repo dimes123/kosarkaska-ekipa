@@ -21,6 +21,7 @@ def igralci():
 def igralec(id):
     podatki_o_igralcu = modeli.pridobi_podatke(id)
     seznam_tekem = modeli.seznam_tekem(id)
+    print(seznam_tekem)
     return template('igralec',
                      podatki_o_igralcu = podatki_o_igralcu,
                      seznam_tekem = seznam_tekem

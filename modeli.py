@@ -140,7 +140,7 @@ def seznam_tekem(id):
     """
     Vrne seznam vseh tekem, na katerih je ta igralec igral
     """
-    return conn.execute("""SELECT * FROM igralci 
-                            JOIN statistika ON playerREF = number
-                           WHERE number = ?
+    return conn.execute("""SELECT * FROM statistika 
+                            JOIN tekme ON date = dateREF
+                           WHERE playerREF = ?
                         """, [id]).fetchall()
