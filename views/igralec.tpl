@@ -1,52 +1,55 @@
 % rebase('osnova')
+<head>
+<style>
+table
+{
+    width:80%;
+}
+table td, table th {
+  border: 1px solid black;
+  text-align: center;
+}
 
+</style>
+</head>
 
+<body>
 <h1 class="title is-3 is-spaced"> {{podatki_o_igralcu[1]}} </h1>
-<p>
 <ol>
     <li>
-        Številka: {{podatki_o_igralcu[0]}}
+        <b>Številka</b>: {{podatki_o_igralcu[0]}}
     </li>
     <li>
-        Višina: {{podatki_o_igralcu[3]}} 
+        <b>Višina</b>: {{podatki_o_igralcu[3]}} 
     </li>
     <li>
-        Teža: {{podatki_o_igralcu[4]}} paunds
+        <b>Teža</b>: {{podatki_o_igralcu[4]}} pounds
     </li>
     <li>
-        Leto rojstva: {{podatki_o_igralcu[5]}}
+        <b>Leto rojstva</b>: {{podatki_o_igralcu[5]}}
     </li>
 </ol>
-</p>
 
-<h5 class="subtitle is-5"> Igralec je igral na naslednjih tekmah:</h5>
-<p>
-    <ol>
-        % for tekma in seznam_tekem: 
-            <p>
-                <ol>
-                <li>
-                    Datum: {{tekma[1]}}
-                </li>
-                <li>
-                    Nasprotnik: {{tekma[7]}}
-                </li>
-                <li>
-                    Throwbacks: {{tekma[2]}}
-                </li>
-                <li>
-                    Asistence: {{tekma[3]}}
-                </li>
-                <li>
-                    STL: {{tekma[4]}}
-                </li>
-                <li>
-                    Točke: {{tekma[5]}}
-                </li>
-                </ol>
-            </p>
-        % end
-    </ol>
-</p>
-
-
+<br />
+<h2 class="title is-3 is-spaced">Statistika igralca</h2>
+<table>
+<tr>
+    <th>Datum</th>
+    <th>Nasprotnik</th>
+    <th>Skoki</th>
+    <th>Podaje</th>
+    <th>Ukradene žoge</th>
+    <th>Točke</th>
+</tr>
+    %for tekma in seznam_tekem:
+    <tr>
+    <td>{{tekma[1]}}</td>
+    <td>{{tekma[7]}}</td>
+    <td>{{tekma[2]}}</td>
+    <td>{{tekma[3]}}</td>
+    <td>{{tekma[4]}}</td>
+    <td>{{tekma[5]}}</td>
+    </tr>
+    %end
+</table>
+</body>
