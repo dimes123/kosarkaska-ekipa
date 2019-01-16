@@ -1,4 +1,4 @@
-from bottle import route, run, template, get
+from bottle import route, run, template, get, static_file
 import modeli
 
 @get('/')
@@ -27,5 +27,8 @@ def igralec(id):
                      seznam_tekem = seznam_tekem
                      )
 
+@get("/static/<filepath>")
+def js(filepath):
+    return static_file(filepath, root="static")
 
 run(host='localhost', port=8080, reloader=True, debug=True)

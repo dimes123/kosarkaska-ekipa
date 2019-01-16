@@ -1,5 +1,6 @@
 % rebase('osnova')
 <head>
+<script src = "/static/sorttable.js"></script>
 <style>
 table
 {
@@ -32,7 +33,7 @@ table td, table th {
 
 <br />
 <h2 class="title is-3 is-spaced">Statistika igralca</h2>
-<table>
+<table class="sortable">
 <tr>
     <th>Datum</th>
     <th>Nasprotnik</th>
