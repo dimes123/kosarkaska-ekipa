@@ -98,6 +98,15 @@ def tekme_v_obdobju(zacDatum, konDatum):
                         GROUP BY opponent""",[zacDatum, konDatum]).fetchall()
     return rez
 
+def tekme_v_obdobju_vse(zacDatum, konDatum):
+    """
+    Vrne seznam tekm, ki jih je ekipa odigrala med dvema datumoma
+    """
+    rez = conn.execute("""SELECT * FROM tekme 
+                        WHERE date >= ? AND date <= ?
+                        """,[zacDatum, konDatum]).fetchall()
+    return rez
+
 def stevilo_zmag(zacDatum, konDatum):
     """
     Vrne število zmag ekipe v določenem času
@@ -144,3 +153,10 @@ def seznam_tekem(id):
                             JOIN tekme ON date = dateREF
                            WHERE playerREF = ?
                         """, [id]).fetchall()
+
+def podatki_o_ekipi():
+    """
+    Funckija vrne osnovne podatke o ekipi Miami heat
+    """
+    return conn.execute("""SELECT * FROM ekipe
+                            WHERE Tag = 'MIA' """, ).fetchone()
