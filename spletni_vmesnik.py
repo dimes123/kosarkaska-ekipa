@@ -20,7 +20,7 @@ def igralci():
 @get('/igralci/<id:int>/')
 def igralec(id):
     podatki_o_igralcu = modeli.pridobi_podatke(id)
-    seznam_tekem = modeli.seznam_tekem(id)
+    seznam_tekem = modeli.statistika_igralca_s_tekem(id)
     return template('igralec',
                      podatki_o_igralcu = podatki_o_igralcu,
                      seznam_tekem = seznam_tekem
@@ -51,5 +51,25 @@ def js(filepath):
 
 @get('/povprecja/')
 def povprecja():
-    return template('povprecja')
+    igralci = modeli.igralci_vsi()
+    return template('povprecja',
+                    vse_osebe = igralci)
+
+@get('/povprecja/povpigralec/')
+def povpigralec():
+    ime = request.query.igralci
+    id = modeli.id_igralca(ime)[0]
+    maximum = modeli.max_stevilo_tock(id)
+    average = modeli.avg_stevilo_tock(id)
+    print(average)
+    #avg = modeli.avg_stevilo_tock(id)
+    return template('povpigralec',
+                    ime = ime,
+                    max = maximum,
+                    avg = average)
+
+@get('/povpekipa/')
+def povpekipa():
+    return template('povpekipa')
+
 run(host='localhost', port=8080, reloader=True, debug=True)

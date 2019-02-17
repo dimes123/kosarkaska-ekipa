@@ -88,7 +88,6 @@ def najvec_ukradene(datum):
     """
     return conn.execute("SELECT playerRef, max(steals) FROM statistika WHERE statistika.dateREF = ?",[datum]).fetchone()
 
-
 def tekme_v_obdobju(zacDatum, konDatum):
     """
     Vrne seznam tekm, ki jih je ekipa odigrala med dvema datumoma
@@ -145,7 +144,7 @@ def igralci_vsi():
     """
     return conn.execute("""SELECT number, name, position FROM igralci""").fetchall()
 
-def seznam_tekem(id):
+def statistika_igralca_s_tekem(id):
     """
     Vrne seznam vseh tekem, na katerih je ta igralec igral
     """
@@ -154,9 +153,23 @@ def seznam_tekem(id):
                            WHERE playerREF = ?
                         """, [id]).fetchall()
 
+def max_stevilo_tock(id):
+    """
+    Vrne maksimalno število vse statistike iz tekem za igralca z nekim id-jem
+    """
+    return conn.execute("SELECT MAX(rebounds), MAX(assists), MAX(steals), MAX(points) FROM statistika WHERE statistika.playerREF = ?;",[id]).fetchall()
+
+def avg_stevilo_tock(id):
+    """
+    Vrne maksimalno število vse statistike iz tekem za igralca z nekim id-jem
+    """
+    return conn.execute("SELECT AVG(rebounds), AVG(assists), AVG(steals), AVG(points) FROM statistika WHERE statistika.playerREF = ?;",[id]).fetchall()
+
+
 def podatki_o_ekipi():
     """
     Funckija vrne osnovne podatke o ekipi Miami heat
     """
     return conn.execute("""SELECT * FROM ekipe
                             WHERE Tag = 'MIA' """, ).fetchone()
+
