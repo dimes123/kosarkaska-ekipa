@@ -74,21 +74,30 @@ def povpekipa():
 
 @get('/dodaj_igralca/')
 def dodaj_igralca():
-    return template('dodaj_igralca')
+    return template('dodaj_igralca',
+                        stDresa = 0,
+                        imeIgralca = '',
+                        pozicija = '',
+                        visina = '',
+                        teza = 0,
+                        letoRojstva = '',
+                        )
 
 @post('/dodaj_igralca/')
 def dodajanje_igralca():
+    ime = request.forms.stDresa
+    ime2 = request.forms.teza
+    print(ime, ime2)
     if (int(request.forms.stDresa) >= 0) and (int(request.forms.teza) > 0):
         id = modeli.dodaj_igralca(
             stDresa = request.forms.stDresa,
             imeIgralca = request.forms.imeIgralca,
             pozicija = request.forms.pozicija,
             visina = request.forms.visina,
-            teza = request.forms.reza,
+            teza = request.forms.teza,
             letoRojstva = request.forms.letoRojstva
         )
-    redirect("/igralci/")   
-
+    redirect("/igralci/")
 
 
 run(host='localhost', port=8080, reloader=True, debug=True)
