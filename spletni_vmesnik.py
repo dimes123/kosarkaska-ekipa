@@ -1,4 +1,4 @@
-from bottle import route, run, template, get, static_file, post, request
+from bottle import route, run, template, get, static_file, post, request, redirect
 import modeli
 
 @get('/')
@@ -71,5 +71,24 @@ def povpigralec():
 @get('/povpekipa/')
 def povpekipa():
     return template('povpekipa')
+
+@get('/dodaj_igralca/')
+def dodaj_igralca():
+    return template('dodaj_igralca')
+
+@post('/dodaj_igralca/')
+def dodajanje_igralca():
+    if (int(request.forms.stDresa) >= 0) and (int(request.forms.teza) > 0):
+        id = modeli.dodaj_igralca(
+            stDresa = request.forms.stDresa,
+            imeIgralca = request.forms.imeIgralca,
+            pozicija = request.forms.pozicija,
+            visina = request.forms.visina,
+            teza = request.forms.reza,
+            letoRojstva = request.forms.letoRojstva
+        )
+    redirect("/igralci/")   
+
+
 
 run(host='localhost', port=8080, reloader=True, debug=True)

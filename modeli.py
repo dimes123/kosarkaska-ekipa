@@ -173,3 +173,41 @@ def podatki_o_ekipi():
     return conn.execute("""SELECT * FROM ekipe
                             WHERE Tag = 'MIA' """, ).fetchone()
 
+def dodaj_igralca(stDresa, imeIgralca, pozicija, visina, teza, letoRojstva):
+    """
+    Doda igralca v bazo, če so vsi podatki pravilni.
+    """
+    with conn:    
+        rez = conn.execute("""SELECT number FROM igralci""").fetchall()
+        seznamStevilk = [podatek[0] for podatek in rez]
+        if stDresa not in seznamStevilk:
+            id = conn.execute (
+                """
+                INSERT INTO igralci (
+                    number,
+                    name,
+                    position,
+                    height,
+                    weight,
+                    year_of_birth
+                )
+                VALUES (?,?,?,?,?,?)""",
+                [stDresa,imeIgralca,pozicija,visina,teza, letoRojstva]).lastrowid
+            rez = conn.execute("SELECT date FROM tekme").fetchall()
+            datumi = [podatek[0] for podatek in rez]
+            for datum in datumi:
+                conn.execute(
+                    """
+                    INSERT INTO statistika (
+                        playerRef,
+                        dateRef,
+                        rebounds,
+                        assists,
+                        steals,
+                        points
+                    )
+                    VALUES (?,?,?,?,?,?)""",[stDresa, datum,0,0,0,0]
+                )
+            print("izvede se")            
+            return (id)
+
