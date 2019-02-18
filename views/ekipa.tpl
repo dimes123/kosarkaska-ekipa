@@ -47,19 +47,27 @@ h2 {
 
 <br/>
 
-<h2 class="title is-3 is-spaced">Tekme</h2>
+<h2 class="title is-3 is-spaced">Tekme med dvema datumoma</h2>
 
 
 <form action="tekme/" method="get">
-<label>Start date:</label>
-<input type="date" name="zacetek" min="2017-10-18" max="2018-04-11" value="2017-10-18">
-<label>Start date:</label>
-<input type="date" name="konec" min="2017-10-18" max="2018-04-11" value="2018-04-11">
+<div>
+<div class="form-group row">
+  <label for="example-date-input" class="col-2 col-form-label">Začetni datum:</label>
+  <div class="col-2.5">
+    <input type="date", class = "form-control", name="zacetek", min="2017-10-18", max="2018-04-11", value="2017-10-18", required>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-date-input", class="col-2 col-form-label">Končni datum:</label>
+  <div class="col-2.5">
+    <input type="date", class = "form-control", name="konec", min="2017-10-18", max="2018-04-11", value="2018-04-11", required>
+  </div>
+</div>
 
-
-<br/>
-<br/>
-<input type="submit" value="Prikaži tekme">
+<center>
+<input type="submit" value="Prikaži tekme"  class="btn btn-primary">
+</center>
 </form>
 
 

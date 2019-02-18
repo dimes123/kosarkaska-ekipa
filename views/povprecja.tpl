@@ -5,17 +5,17 @@
 
 <form action="povpigralec/" method="get">
 
-<h1 class="title is-3 is-spaced">Igralci:<h1/>
-<select multiple name="igralci">
-% for ime in vse_osebe:
-    <option value="{{ime[1]}}">{{ime[1]}}</option>
-% end
-
-<br/>
-<br/>
-<input type="submit" value="Povprečje igralca">
+<div class="form-group">
+    <label for="exampleSelect1">Igralci:</label>
+    <select class="form-control", name='Igralci'>
+    % for ime in vse_osebe:
+        <option value="{{ime[1]}}">{{ime[1]}}</option>
+    % end
+    </select>
+  </div>
+<input type="submit" value="Povprečje igralca" class="btn btn-primary">
 <form/>
 
 <br/>
 <br/>
-<a href = "http://localhost:8080/povpekipa/" class = "button">Povprečje ekipe</a>
+<a href = "http://localhost:8080/povpekipa/" class="btn btn-primary">Povprečje ekipe</a>

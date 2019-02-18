@@ -58,6 +58,7 @@ def povprecja():
 @get('/povprecja/povpigralec/')
 def povpigralec():
     ime = request.query.igralci
+    print(ime)
     id = modeli.id_igralca(ime)[0]
     maximum = modeli.max_stevilo_tock(id)
     average = modeli.avg_stevilo_tock(id)
@@ -98,6 +99,10 @@ def dodajanje_igralca():
             letoRojstva = request.forms.letoRojstva
         )
     redirect("/igralci/")
+
+@get('/naj_igralec/')
+def naj_igralec():
+    return template('naj_igralec')
 
 
 run(host='localhost', port=8080, reloader=True, debug=True)
