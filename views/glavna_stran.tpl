@@ -1,5 +1,14 @@
 % rebase('osnova')
+<head>
+  <script src = "/static/sorttable.js"></script>
+  <style>
+    div{
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
 
+<body>
 <p>
 Na voljo vam je {{ st_tekem }} tekem iz sezone 2017-18, v katerih je igrala košarkarska ekipa Miami Heat.
 </p>
@@ -8,9 +17,21 @@ Izbirate lahko med {{ st_igralcev }}-imi rednimi igralci v tej sezoni, kjer je z
 </p>
 </br>
 
-<h1 class="title is-3 is-spaced"">Na voljo so vam naslednje opcije:</h1>
-<a class = "btn btn-primary" href = "http://localhost:8080/igralci/">Prikaži podatke o igralcih</a>
-<a class = "btn btn-primary" href = "http://localhost:8080/ekipa/">Prikaži podatke o ekipi</a>
-<a class = "btn btn-primary" href = "http://localhost:8080/povprecja/">Povprečja</a>
+<h1 class="title is-3 is-spaced"">Izbire:</h1>
+<div>
+    <a class = "btn btn-primary" href = "http://localhost:8080/igralci/">Prikaži podatke o igralcih</a>
+</div>
+<div>
+    <a class = "btn btn-primary" href = "http://localhost:8080/ekipa/">Prikaži podatke o ekipi</a>
+</div>
+<div>
+        <a class = "btn btn-primary" href = "http://localhost:8080/povprecja/">Povprečja</a>
+</div>
+<div>
+    <a class = "btn btn-primary" href = "http://localhost:8080/naj_igralec/">Najboljši igralec</a>
+</div>
+<div>
 <a class = "btn btn-primary" href = "http://localhost:8080/dodaj_igralca/">Dodajanje igralca</a>
-<a class = "btn btn-primary" href = "http://localhost:8080/naj_igralec/">Najboljši igralec</a>
+</div>
+
+</body>

@@ -26,7 +26,7 @@ h2 {
 <br/>
 
 <br/>
-<table class="sortable">
+<table class="table-sm table-sortable">
 <tr>
     <th>Datum</th>
     <th>Nasprotnik</th>

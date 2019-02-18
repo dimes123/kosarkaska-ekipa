@@ -58,20 +58,14 @@ def povprecja():
 @get('/povprecja/povpigralec/')
 def povpigralec():
     ime = request.query.igralci
-    print(ime)
     id = modeli.id_igralca(ime)[0]
-    maximum = modeli.max_stevilo_tock(id)
-    average = modeli.avg_stevilo_tock(id)
-    print(average)
+    maximum = modeli.max_stevilo_tock(id)[0]
+    average = modeli.avg_stevilo_tock(id)[0]
     #avg = modeli.avg_stevilo_tock(id)
     return template('povpigralec',
                     ime = ime,
                     max = maximum,
                     avg = average)
-
-@get('/povpekipa/')
-def povpekipa():
-    return template('povpekipa')
 
 @get('/dodaj_igralca/')
 def dodaj_igralca():
@@ -88,7 +82,6 @@ def dodaj_igralca():
 def dodajanje_igralca():
     ime = request.forms.stDresa
     ime2 = request.forms.teza
-    print(ime, ime2)
     if (int(request.forms.stDresa) >= 0) and (int(request.forms.teza) > 0):
         id = modeli.dodaj_igralca(
             stDresa = request.forms.stDresa,

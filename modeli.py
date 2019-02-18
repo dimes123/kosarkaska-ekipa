@@ -163,7 +163,7 @@ def avg_stevilo_tock(id):
     """
     Vrne maksimalno število vse statistike iz tekem za igralca z nekim id-jem
     """
-    return conn.execute("SELECT AVG(rebounds), AVG(assists), AVG(steals), AVG(points) FROM statistika WHERE statistika.playerREF = ?;",[id]).fetchall()
+    return conn.execute("SELECT ROUND(AVG(rebounds),2), ROUND(AVG(assists),2), ROUND(AVG(steals),2), ROUND(AVG(points),2) FROM statistika WHERE statistika.playerREF = ?;",[id]).fetchall()
 
 
 def podatki_o_ekipi():

@@ -1,24 +1,29 @@
 % rebase('osnova')
+<!-- head -->
 <head>
-<script src = "/static/sorttable.js"></script>
-<style>
-table
-{
+  <script src = "/static/sorttable.js"></script>
+  <style>
+  table
+  {
     width:80%;
-}
-table td, table th {
-  border: 1px solid black;
-  text-align: center;
-}
-h2 {
+  }
+  table td, table th {
+    border: 1px solid black;
     text-align: center;
-}
-
+  }
+  h2 {
+    text-align: center;
+  }
+  h1{
+    text-align: center;
+  }
 </style>
 </head>
+<!-- head -->
 
+<!-- body --!>
 <body>
-<h1 class = "title is-3 is-spaced"> {{podatki_o_ekipi[2]}} </h1>
+<h1> {{podatki_o_ekipi[2]}} </h1>
 <li>
     <b>Trener</b>: {{podatki_o_ekipi[1]}}
 </li>
@@ -27,8 +32,9 @@ h2 {
 </li>
 
 <br/>
-<h2 class="title is-3 is-spaced">Igralci</h2>
-<table class="sortable">
+
+<h2>Igralci</h2>
+<table class="table-sm table-sortable">
 <tr>
     <th>Ime</th>
     <th>Številka dresa</th>
@@ -43,15 +49,14 @@ h2 {
     %end
 </table>
 <br/>
-<center> Če želiš natančnejše podatke o posameznem igralcu, si jih poglej na osnovni strani. <center/>
-
 <br/>
-
-<h2 class="title is-3 is-spaced">Tekme med dvema datumoma</h2>
 
 
 <form action="tekme/" method="get">
-<div>
+
+<h2>Tekme med dvema datumoma</h2>
+<center>
+
 <div class="form-group row">
   <label for="example-date-input" class="col-2 col-form-label">Začetni datum:</label>
   <div class="col-2.5">
@@ -65,10 +70,10 @@ h2 {
   </div>
 </div>
 
-<center>
 <input type="submit" value="Prikaži tekme"  class="btn btn-primary">
+
 </center>
 </form>
 
-
 </body>
+<!-- body --!>

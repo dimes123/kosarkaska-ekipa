@@ -2,8 +2,7 @@
 <head>
 <script src = "/static/sorttable.js"></script>
 <style>
-table
-{
+table {
     width:80%;
 }
 table td, table th {
@@ -32,8 +31,8 @@ table td, table th {
 </ol>
 
 <br />
-<h2 class="title is-3 is-spaced">Statistika igralca</h2>
-<table class="sortable">
+<h2 class="title is-3 is-spaced" >Statistika igralca</h2>
+<table class="table-sm table-sortable">
 <tr>
     <th>Datum</th>
     <th>Nasprotnik</th>
