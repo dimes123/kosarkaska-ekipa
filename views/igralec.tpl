@@ -24,6 +24,7 @@
 <body>
 <h1 class="title is-3 is-spaced"> {{podatki_o_igralcu[1]}} </h1>
 
+
 % if slika_obstaja:
 <div class="row">
   <div class="column">
@@ -49,6 +50,11 @@
             </li>
         </ol>
     </p>
+    <div > 
+        <form method = 'POST' role = 'form' class = "form-horizontal">
+            <button type="submit" class="btn btn-danger" value = "Submit/">Odstrani</button>
+        </form>
+    </div>
   </div>
 </div>
 %else:
@@ -69,6 +75,9 @@
             </li>
         </ol>
     </p>
+    <form method = 'POST' role = 'form' class = "form-horizontal">
+            <button type="submit" class="btn btn-danger" value = "Submit/">Odstrani</button>
+    </form>
 % end
 
 <br />
@@ -96,8 +105,3 @@
     %end
 </table>
 </body>
-<div class="col-md-12 text-center"> 
-    <form method = 'POST' role = 'form' class = "form-horizontal">
-        <button type="submit" class="btn btn-danger" value = "Submit/">Odstrani</button>
-    </form>
-</div>
