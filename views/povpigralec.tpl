@@ -3,30 +3,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-* {
-  box-sizing: border-box;
-}
+  <style>
+  * {
+    box-sizing: border-box;
+  }
 
-.column {
-  float: left;
-  width: 50%;
-  padding: 10px;
-}
+  .column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+  }
 
 
-h4 {
-  margin: 15px 0;
-}
+  h4 {
+    margin: 15px 0;
+  }
+  img {
+    width: 200px;
+  }
 </style>
 </head>
 <body>
 
 % if slika_obstaja:
-<img src="/static/{{id}}.png" width="20%" height="20%"/>
+<div class="row">
+  <div class="column" style="text-align: center;">
+    <h4> {{ime}} </h4>
+  </div>
+  <div class="column">
+      <img src="/static/{{id}}.png"/>
+  </div>
+</div>
+% else: 
+<h2>{{ime}} </h2>
 % end
-
-<h2>{{ime}}: </h2>
 
 <div class="row">
   <div class="column">
