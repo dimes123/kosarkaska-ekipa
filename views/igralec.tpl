@@ -73,7 +73,8 @@
 
 <br />
 <h2 class="title is-3 is-spaced" >Statistika igralca</h2>
-<table class="table-sm table-sortable">
+<table class="table table-hover table-sortable">
+<thead class="thead-dark">
 <tr>
     <th>Datum</th>
     <th>Nasprotnik</th>
@@ -82,6 +83,7 @@
     <th>Ukradene žoge</th>
     <th>Točke</th>
 </tr>
+</thead>
     %for tekma in seznam_tekem:
     <tr>
     <td>{{tekma[1]}}</td>

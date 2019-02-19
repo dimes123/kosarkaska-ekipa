@@ -55,12 +55,14 @@
 <br/>
 
 <h2>Igralci</h2>
-<table class="table-sm table-sortable">
+<table class="table table-hover table-sortable">
+<thead class="thead-dark">
 <tr>
     <th>Ime</th>
     <th>Številka dresa</th>
     <th>Pozicija</th>
 </tr>
+</thead>
     %for igralec in seznam_igralcev:
     <tr>
     <td>{{igralec[1]}}</td>

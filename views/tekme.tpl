@@ -26,7 +26,8 @@ h2 {
 <br/>
 
 <br/>
-<table class="table-sm table-sortable">
+<table class="table table-hover table-sortable">
+<thead class="thead-dark">
 <tr>
     <th>Datum</th>
     <th>Nasprotnik</th>
@@ -34,6 +35,7 @@ h2 {
     <th>Točke Miami</th>
     <th>Točke nasprotnik</th>
 </tr>
+</thead>
     %for tekma in tekme:
     <tr>
     <td>{{tekma[0]}}</td>
