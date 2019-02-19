@@ -22,6 +22,8 @@ Izbirate lahko med {{ st_igralcev }}-imi rednimi igralci v tej sezoni, kjer je z
 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
   <div class="btn-group  mr-4" role="group" aria-label="First group">
     <a href="http://localhost:8080/igralci/" class="btn btn-secondary" role="button" aria-pressed="true">Prikaži podatke o igralcih</a>
+  </div>
+  <div class="btn-group  mr-4" role="group" aria-label="Second group">
     <a href="http://localhost:8080/ekipa/" class="btn btn-secondary" role="button" aria-pressed="true">Prikaži podatke o ekipi</a>
   </div>
   <div class="btn-group  mr-4" role="group" aria-label="Third group">
@@ -33,9 +35,9 @@ Izbirate lahko med {{ st_igralcev }}-imi rednimi igralci v tej sezoni, kjer je z
   <div class="btn-group  mr-4" role="group" aria-label="Fifth group">
     <a href="http://localhost:8080/dodaj_igralca/" class="btn btn-secondary" role="button" aria-pressed="true">Dodajanje igralca</a>
   </div>
-</div>
-<div>
-<a class = "btn btn-primary" href = "http://localhost:8080/najboljsi/">Najboljsi igralec</a>
+  <div class="btn-group  mr-4" role="group" aria-label="Sixth group">
+    <a class = "btn btn-secondary" href = "http://localhost:8080/najboljsi/">Najboljsi igralec</a>
+  </div>
 </div>
 
 
