@@ -69,15 +69,7 @@ def povpigralec():
 
 @get('/dodaj_igralca/')
 def dodaj_igralca():
-    return template('dodaj_igralca',
-                        stDresa = 0,
-                        imeIgralca = '',
-                        pozicija = '',
-                        visina = '',
-                        teza = 0,
-                        letoRojstva = '',
-                        napaka =False
-                        )
+    return template('dodaj_igralca', napaka =False)
 
 @post('/dodaj_igralca/')
 def dodajanje_igralca():
@@ -93,16 +85,11 @@ def dodajanje_igralca():
                 letoRojstva = request.forms.letoRojstva
             )
     except:
-        return template('dodaj_igralca',
-                        stDresa = 0,
-                        imeIgralca = '',
-                        pozicija = '',
-                        visina = '',
-                        teza = 0,
-                        letoRojstva = '',
-                        napaka = True
-                        )
-    redirect("/igralci/")
+        #redirect (object = "/opozorilo/")
+        return template('dodaj_igralca', napaka = True)
+
+    redirect('/igralci/')
+
 @get('/naj_igralec/')
 def naj_igralec():
     return template('naj_igralec')
