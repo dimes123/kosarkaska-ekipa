@@ -210,6 +210,14 @@ def dodaj_igralca(stDresa, imeIgralca, pozicija, visina, teza, letoRojstva):
                 )          
             return (id)
 
+def pobrisi_igralca(id):
+    """
+    Pobrise igralca iz baze
+    """
+    conn.execute("""DELETE FROM statistika WHERE statistika.playerREF == ?""",[id])
+    conn.execute("""DELETE FROM igralci WHERE number == ?""",[id])
+    return None
+
 def ekipe():
     """
     Vrne seznam vseh ekip.

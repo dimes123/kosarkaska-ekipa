@@ -30,6 +30,14 @@ def igralec(id):
                      slika_obstaja = obstaja
                      )
 
+@post('/igralci/<id:int>/')
+def odstrani_igralca(id):
+    neki = modeli.pobrisi_igralca(id)
+    vsi = modeli.igralci_vsi()
+    return template('igralci',
+                     igralci = vsi
+                     )
+
 @get('/ekipa/')
 def ekipa():
     podatki = modeli.podatki_o_ekipi()

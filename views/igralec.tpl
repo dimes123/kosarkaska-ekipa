@@ -96,3 +96,8 @@
     %end
 </table>
 </body>
+<div class="col-md-12 text-center"> 
+    <form method = 'POST' role = 'form' class = "form-horizontal">
+        <button type="submit" class="btn btn-danger" value = "Submit/">Odstrani</button>
+    </form>
+</div>
