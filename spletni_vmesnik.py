@@ -89,6 +89,7 @@ def dodajanje_igralca():
                 teza = request.forms.teza,
                 letoRojstva = request.forms.letoRojstva
             )
+        else: raise Exception('Negativna vrednost')
     except:
         #redirect (object = "/opozorilo/")
         return template('dodaj_igralca', st = request.forms.stDresa, napaka = True)
