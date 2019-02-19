@@ -180,7 +180,6 @@ def dodaj_igralca(stDresa, imeIgralca, pozicija, visina, teza, letoRojstva):
     with conn:    
         rez = conn.execute("""SELECT number FROM igralci""").fetchall()
         seznamStevilk = [podatek[0] for podatek in rez]
-        print(seznamStevilk)
         if stDresa not in seznamStevilk:
             id = conn.execute (
                 """

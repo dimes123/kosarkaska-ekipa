@@ -13,7 +13,7 @@
       .header {
         overflow: hidden;
         background-color: #f1f1f1;
-        padding: 20px 10px;
+        padding: 20px 30px;
       }
       .header a.logo {
         float: left;
@@ -37,10 +37,12 @@
 <!-- body -->
   <body>
     <div class="header">
-    <img src= "/static/logo.png" style="width: 35px;"/>
-      <a class="logo">Miami Heat 2017/18</a>
+      <a href="/">
+        <img src= "/static/logo.png" style="width: 35px;"/>
+      </a>
+      <a href= "/" class="logo" >Miami Heat 2017/18</a>
       <div class="header-right">
-        <a href = "/", class="btn btn-success">Domov</a>
+        <a href = "/" class="btn btn-secondary btn active">Domov</a>
       </div>
     </div>
     <br/>

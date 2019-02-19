@@ -92,7 +92,6 @@ def dodajanje_igralca():
     except:
         #redirect (object = "/opozorilo/")
         return template('dodaj_igralca', st = request.forms.stDresa, napaka = True)
-
     redirect('/igralci/')
 
 @get('/naj_igralec/')
