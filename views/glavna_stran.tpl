@@ -30,13 +30,10 @@ Izbirate lahko med {{ st_igralcev }}-imi rednimi igralci v tej sezoni, kjer je z
     <a href="http://localhost:8080/povprecja/" class="btn btn-secondary" role="button" aria-pressed="true">Povprečja</a>
   </div>
   <div class="btn-group  mr-4" role="group" aria-label="Forth group">
-    <a href="http://localhost:8080/naj_igralec/" class="btn btn-secondary" role="button" aria-pressed="true">Najboljši igralec</a>
+    <a class = "btn btn-secondary" href = "http://localhost:8080/najboljsi/">Najboljši igralec</a>
   </div>
   <div class="btn-group  mr-4" role="group" aria-label="Fifth group">
     <a href="http://localhost:8080/dodaj_igralca/" class="btn btn-secondary" role="button" aria-pressed="true">Dodajanje igralca</a>
-  </div>
-  <div class="btn-group  mr-4" role="group" aria-label="Sixth group">
-    <a class = "btn btn-secondary" href = "http://localhost:8080/najboljsi/">Najboljsi igralec</a>
   </div>
 </div>
 
