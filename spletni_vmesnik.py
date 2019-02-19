@@ -76,23 +76,33 @@ def dodaj_igralca():
                         visina = '',
                         teza = 0,
                         letoRojstva = '',
+                        napaka =False
                         )
 
 @post('/dodaj_igralca/')
 def dodajanje_igralca():
-    ime = request.forms.stDresa
-    ime2 = request.forms.teza
-    if (int(request.forms.stDresa) >= 0) and (int(request.forms.teza) > 0):
-        id = modeli.dodaj_igralca(
-            stDresa = request.forms.stDresa,
-            imeIgralca = request.forms.imeIgralca,
-            pozicija = request.forms.pozicija,
-            visina = request.forms.visina,
-            teza = request.forms.teza,
-            letoRojstva = request.forms.letoRojstva
-        )
+    try:
+        if (int(request.forms.stDresa) >= 0) and (int(request.forms.teza) > 0):
+            print(request.forms.stDresa)
+            id = modeli.dodaj_igralca(
+                stDresa = request.forms.stDresa,
+                imeIgralca = request.forms.imeIgralca,
+                pozicija = request.forms.pozicija,
+                visina = request.forms.visina,
+                teza = request.forms.teza,
+                letoRojstva = request.forms.letoRojstva
+            )
+    except:
+        return template('dodaj_igralca',
+                        stDresa = 0,
+                        imeIgralca = '',
+                        pozicija = '',
+                        visina = '',
+                        teza = 0,
+                        letoRojstva = '',
+                        napaka = True
+                        )
     redirect("/igralci/")
-
 @get('/naj_igralec/')
 def naj_igralec():
     return template('naj_igralec')

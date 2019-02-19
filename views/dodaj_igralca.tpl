@@ -3,6 +3,28 @@
 
 <h1 class = "title is-3 is-spaced"> Dodajanje igralca </h1>
 
+%if napaka:
+<div class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+% end
+
 
 <form method = 'POST' role = 'form' class = "form-horizontal">
 <div class = "form-row">
@@ -53,7 +75,7 @@
     </div>
     <div class = "col-xs-4 col-md-2">
         <div for = "letoRojstva">LetoRojstva</div>
-        <input type = "text", class = "form-control", name = letoRojstva, id = {{letoRojstva}}, placeholder = "Leto Rojstva", required>
+        <input type = "number", class = "form-control", name = "letoRojstva", id = {{letoRojstva}}, placeholder = "Leto Rojstva", required>
         <div class="valid-feedback">
             Looks good!
         </div>

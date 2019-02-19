@@ -21,7 +21,7 @@
 </head>
 <!-- head -->
 
-<!-- body --!>
+<!-- body -->
 <body>
 <h1> {{podatki_o_ekipi[2]}} </h1>
 <li>
@@ -76,4 +76,4 @@
 </form>
 
 </body>
-<!-- body --!>
+<!-- body -->
