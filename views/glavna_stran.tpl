@@ -33,5 +33,8 @@ Izbirate lahko med {{ st_igralcev }}-imi rednimi igralci v tej sezoni, kjer je z
 <div>
 <a class = "btn btn-primary" href = "http://localhost:8080/dodaj_igralca/">Dodajanje igralca</a>
 </div>
+<div>
+<a class = "btn btn-primary" href = "http://localhost:8080/najboljsi/">Najboljsi igralec</a>
+</div>
 
 </body>

@@ -103,6 +103,33 @@ def ali_slika_obstaja(id):
     """ funkcija preveri, če fotografija obstaja na naslovu /static/id.png"""
     nekaj = os.path.exists("./static/" + str(id) + ".png")
     return nekaj
+
+@get('/najboljsi/')
+def najboljsi():
+    ekipe = modeli.ekipe()
+    return template('najboljsi', seznamEkip = ekipe, stevec =1)
+
+@post('/najboljsi/')
+def najboljsi_igralec():
+    if request.forms.get("izbiraEkipe"):
+        izbranaEkipa = request.forms.izbiraEkipe
+        sezDatumov = modeli.poisci_datume(str(izbranaEkipa))
+        return template('najboljsi', ekipa = izbranaEkipa, seznamDatumov = sezDatumov,stevec = 2)
+    elif request.forms.get("izbiraDatuma"):
+        izbraniDatum = request.forms.izbiraDatuma
+        najvecTock = list(modeli.najvec_tock(izbraniDatum))
+        najvecPodaj = list(modeli.najvec_podaj(izbraniDatum))
+        najvecSkokov = list(modeli.najvec_skoki(izbraniDatum))
+        najvecUkradenih = list(modeli.najvec_ukradene(izbraniDatum))
+        najvecTock.append(modeli.ime_igralca(najvecTock[0]))
+        najvecPodaj.append(modeli.ime_igralca(najvecPodaj[0]))
+        najvecSkokov.append(modeli.ime_igralca(najvecSkokov[0]))
+        najvecUkradenih.append(modeli.ime_igralca(najvecUkradenih[0]))
+        return template('najboljsi', datum = izbraniDatum ,stevec = 3, najvecT = najvecTock,
+                        najvecP = najvecPodaj, najvecS = najvecSkokov, najvecU = najvecUkradenih)
+
     
+#@post('/najboljsi/')
+#def najboljsi_igralec():
 
 run(host='localhost', port=8080, reloader=True, debug=True)

@@ -211,3 +211,11 @@ def dodaj_igralca(stDresa, imeIgralca, pozicija, visina, teza, letoRojstva):
                 )          
             return (id)
 
+def ekipe():
+    """
+    Vrne seznam vseh ekip.
+    """
+    rez = conn.execute("""SELECT franchise FROM ekipe 
+                        WHERE franchise <> 'Miami Heat'""").fetchall()
+    return [podatek[0] for podatek in rez]
+
