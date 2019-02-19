@@ -226,3 +226,14 @@ def ekipe():
                         WHERE franchise <> 'Miami Heat'""").fetchall()
     return [podatek[0] for podatek in rez]
 
+
+def vrni_ekipo(datum):
+    """
+    Vrne ekipo proti kateri je nasa igrala na dolocen datum
+    """
+    rez = conn.execute(
+        """
+        SELECT opponent FROM tekme WHERE date = ?
+        """,[datum]).fetchone()
+    return rez
+

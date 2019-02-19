@@ -36,7 +36,7 @@
 </form>
 %end
 % if stevec > 2:
-<h4>Na {{datum}} so bili dosežki igralcev naslednji:</h4>
+<h4>Na {{datum}} proti nasportniku {{ekipa[0]}} so bili dosežki igralcev naslednji:</h4>
 <h5><b>Največ točk:</b> <a href = "/igralci/{{najvecT[0]}}/">{{najvecT[2]}}</a> : <i>{{najvecT[1]}}</i></h5>
 <h5><b>Največ podaj</b>: <a href = "/igralci/{{najvecP[0]}}/">{{najvecP[2]}}</a> : <i>{{najvecP[1]}}</i></h5>
 <h5><b>Največ skokov</b>: <a href = "/igralci/{{najvecS[0]}}/">{{najvecS[2]}}</a> : <i>{{najvecS[1]}}</i></h5>

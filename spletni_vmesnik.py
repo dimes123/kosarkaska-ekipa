@@ -125,6 +125,7 @@ def najboljsi_igralec():
         return template('najboljsi', ekipa = izbranaEkipa, seznamDatumov = sezDatumov,stevec = 2)
     elif request.forms.get("izbiraDatuma"):
         izbraniDatum = request.forms.izbiraDatuma
+        ekipa = modeli.vrni_ekipo(str(izbraniDatum))
         najvecTock = list(modeli.najvec_tock(izbraniDatum))
         najvecPodaj = list(modeli.najvec_podaj(izbraniDatum))
         najvecSkokov = list(modeli.najvec_skoki(izbraniDatum))
@@ -133,7 +134,7 @@ def najboljsi_igralec():
         najvecPodaj.append(modeli.ime_igralca(najvecPodaj[0]))
         najvecSkokov.append(modeli.ime_igralca(najvecSkokov[0]))
         najvecUkradenih.append(modeli.ime_igralca(najvecUkradenih[0]))
-        return template('najboljsi', datum = izbraniDatum ,stevec = 3, najvecT = najvecTock,
+        return template('najboljsi', datum = izbraniDatum ,stevec = 3, ekipa = ekipa, najvecT = najvecTock,
                         najvecP = najvecPodaj, najvecS = najvecSkokov, najvecU = najvecUkradenih)
 
     
