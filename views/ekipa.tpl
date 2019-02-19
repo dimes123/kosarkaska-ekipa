@@ -17,19 +17,40 @@
   h1{
     text-align: center;
   }
-</style>
+  * {
+  box-sizing: border-box;
+  }
+
+  .column {
+    float: left;
+    width: 20%;
+    padding: 10px;
+  }
+  </style>
 </head>
 <!-- head -->
 
 <!-- body -->
 <body>
 <h1> {{podatki_o_ekipi[2]}} </h1>
-<li>
-    <b>Trener</b>: {{podatki_o_ekipi[1]}}
-</li>
-<li>
-    <b>Kratica</b>: {{podatki_o_ekipi[0]}} 
-</li>
+<div class="row">
+  <div class="column">
+    <p>
+      <img src="/static/ErikSpoelstra.png" style="width:200px;height:200px;">
+    </p>
+  </div>
+  <div class="column" style="align:left;">
+    <h4> Podatki o ekipi: </h4>
+    <p>
+      <li>
+          <b>Trener</b>: {{podatki_o_ekipi[1]}}
+      </li>
+      <li>
+          <b>Kratica</b>: {{podatki_o_ekipi[0]}} 
+      </li>
+    </p>
+  </div>
+</div>
 
 <br/>
 

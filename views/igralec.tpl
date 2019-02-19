@@ -1,34 +1,75 @@
 % rebase('osnova')
 <head>
 <script src = "/static/sorttable.js"></script>
-<style>
-table {
-    width:80%;
-}
-table td, table th {
-  border: 1px solid black;
-  text-align: center;
-}
+    <style>
+    table {
+      width:80%;
+    }
+    table td, table th {
+      border: 1px solid black;
+      text-align: center;
+    }
+    * {
+      box-sizing: border-box;
+    }
 
-</style>
+    .column {
+      float: left;
+      width: 40%;
+      padding: 10px;
+    }
+    </style>
 </head>
 
 <body>
 <h1 class="title is-3 is-spaced"> {{podatki_o_igralcu[1]}} </h1>
-<ol>
-    <li>
-        <b>Številka</b>: {{podatki_o_igralcu[0]}}
-    </li>
-    <li>
-        <b>Višina</b>: {{podatki_o_igralcu[3]}} 
-    </li>
-    <li>
-        <b>Teža</b>: {{podatki_o_igralcu[4]}} pounds
-    </li>
-    <li>
-        <b>Leto rojstva</b>: {{podatki_o_igralcu[5]}}
-    </li>
-</ol>
+
+% if slika_obstaja:
+<div class="row">
+  <div class="column">
+    <p>
+        <img src="/static/{{id}}.png" width="50%" height="50%"/>
+    </p>
+  </div>
+  <div class="column" style="align:left;">
+    <h4> Podatki o igralcu: </h4>
+    <p>
+        <ol>
+            <li>
+                <b>Številka</b>: {{podatki_o_igralcu[0]}}
+            </li>
+            <li>
+                <b>Višina</b>: {{podatki_o_igralcu[3]}} 
+            </li>
+            <li>
+                <b>Teža</b>: {{podatki_o_igralcu[4]}} pounds
+            </li>
+            <li>
+                <b>Leto rojstva</b>: {{podatki_o_igralcu[5]}}
+            </li>
+        </ol>
+    </p>
+  </div>
+</div>
+%else:
+<h4> Podatki o igralcu: </h4>
+    <p>
+        <ol>
+            <li>
+                <b>Številka</b>: {{podatki_o_igralcu[0]}}
+            </li>
+            <li>
+                <b>Višina</b>: {{podatki_o_igralcu[3]}} 
+            </li>
+            <li>
+                <b>Teža</b>: {{podatki_o_igralcu[4]}} pounds
+            </li>
+            <li>
+                <b>Leto rojstva</b>: {{podatki_o_igralcu[5]}}
+            </li>
+        </ol>
+    </p>
+% end
 
 <br />
 <h2 class="title is-3 is-spaced" >Statistika igralca</h2>
