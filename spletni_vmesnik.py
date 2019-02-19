@@ -1,4 +1,5 @@
 from bottle import route, run, template, get, static_file, post, request, redirect
+import os.path
 import modeli
 
 @get('/')
@@ -21,9 +22,12 @@ def igralci():
 def igralec(id):
     podatki_o_igralcu = modeli.pridobi_podatke(id)
     seznam_tekem = modeli.statistika_igralca_s_tekem(id)
+    obstaja = ali_slika_obstaja(id)
     return template('igralec',
                      podatki_o_igralcu = podatki_o_igralcu,
-                     seznam_tekem = seznam_tekem
+                     seznam_tekem = seznam_tekem,
+                     id = id,
+                     slika_obstaja = obstaja
                      )
 
 @get('/ekipa/')
@@ -61,9 +65,11 @@ def povpigralec():
     id = modeli.id_igralca(ime)[0]
     maximum = modeli.max_stevilo_tock(id)[0]
     average = modeli.avg_stevilo_tock(id)[0]
-    #avg = modeli.avg_stevilo_tock(id)
+    obstaja = ali_slika_obstaja(id)
     return template('povpigralec',
                     ime = ime,
+                    id = id,
+                    slika_obstaja = obstaja,
                     max = maximum,
                     avg = average)
 
@@ -103,9 +109,15 @@ def dodajanje_igralca():
                         napaka = True
                         )
     redirect("/igralci/")
+
 @get('/naj_igralec/')
 def naj_igralec():
     return template('naj_igralec')
 
+def ali_slika_obstaja(id):
+    """ funkcija preveri, če fotografija obstaja na naslovu /static/id.png"""
+    nekaj = os.path.exists("./static/" + str(id) + ".png")
+    return nekaj
+    
 
 run(host='localhost', port=8080, reloader=True, debug=True)

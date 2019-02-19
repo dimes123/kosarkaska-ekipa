@@ -211,4 +211,3 @@ def dodaj_igralca(stDresa, imeIgralca, pozicija, visina, teza, letoRojstva):
                 )          
             return (id)
 
-
