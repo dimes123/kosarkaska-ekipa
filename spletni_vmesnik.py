@@ -81,7 +81,6 @@ def dodaj_igralca():
 def dodajanje_igralca():
     try:
         if (int(request.forms.stDresa) >= 0) and (int(request.forms.teza) > 0):
-            print(request.forms.stDresa)
             id = modeli.dodaj_igralca(
                 stDresa = request.forms.stDresa,
                 imeIgralca = request.forms.imeIgralca,
@@ -92,7 +91,7 @@ def dodajanje_igralca():
             )
     except:
         #redirect (object = "/opozorilo/")
-        return template('dodaj_igralca', napaka = True)
+        return template('dodaj_igralca', st = request.forms.stDresa, napaka = True)
 
     redirect('/igralci/')
 

@@ -3,11 +3,16 @@
 
 <h1 class = "title is-3 is-spaced"> Dodajanje igralca </h1>
 
-% if napaka:
-<div class="alert alert-danger" role="alert">
-  Prišlo je do napake. Igralec ni bil dodan v bazo.
+
+<div class = "form-row">
+    <div class = "col-md-6">
+        % if napaka:
+        <div class="alert alert-danger" role="alert">
+            Prišlo je do napake. Igralec s številko {{st}} že obstaja v bazi.
+        </div>
+        % end
+    </div>
 </div>
-% end
 
 <form method = 'POST' role = 'form' class = "form-horizontal">
 <div class = "form-row">
