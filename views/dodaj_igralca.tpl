@@ -40,6 +40,7 @@
                     </select>
                 %else:
                     <select class="custom-select" size="1", name = "pozicija", value = "{{ pozicija }}" required>
+                        <option hidden value={{ pozicija }}>{{ pozicija }}</option>
                         <option name="PG" value="PG">PG</option>
                         <option name="SG" value="SG">SG</option>
                         <option name="SF" value="SF">SF</option>
