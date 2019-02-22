@@ -4,6 +4,7 @@
 
 %if stevec == 1:
 <form method = 'POST' role = 'form'>
+    <p> Izberi nasprotno ekipo, proti kateri je igrala ekipa Miami Heat. </p>
     <div class = "form-row">
     <div class = "col-xs-3 col-md-3">
         <select class = "custom-select" size = "1" name = "izbiraEkipe">
@@ -19,7 +20,7 @@
 </form>
 %end
 %if stevec == 2:
-<h4>Izbral si ekipo {{ekipa}}. Sedaj izberi datum.</h4>
+<p>Izbral si ekipo {{ekipa}}. Sedaj izberi datum.</p>
 <form method = 'POST' role = 'form'>
     <div class = "form-row">
     <div class = "col-xs-3 col-md-3">
@@ -36,7 +37,7 @@
 </form>
 %end
 % if stevec > 2:
-<h4>Na {{datum}} so bili dosežki igralcev naslednji:</h4>
+<h4>Na {{datum}} proti {{ekipa}} so bili dosežki igralcev naslednji:</h4>
 <h5><b>Največ točk:</b> <a href = "/igralci/{{najvecT[0]}}/">{{najvecT[2]}}</a> : <i>{{najvecT[1]}}</i></h5>
 <h5><b>Največ podaj</b>: <a href = "/igralci/{{najvecP[0]}}/">{{najvecP[2]}}</a> : <i>{{najvecP[1]}}</i></h5>
 <h5><b>Največ skokov</b>: <a href = "/igralci/{{najvecS[0]}}/">{{najvecS[2]}}</a> : <i>{{najvecS[1]}}</i></h5>

@@ -2,6 +2,7 @@ from bottle import route, run, template, get, static_file, post, request, redire
 import os.path
 import modeli
 
+
 @get('/')
 def glavna_stran():
     (st_tekem,) = modeli.stevilo_tekem()
@@ -99,32 +100,39 @@ def dodajanje_igralca():
             )
         else: raise Exception('Negativna vrednost')
     except:
-        #redirect (object = "/opozorilo/")
-        return template('dodaj_igralca', st = request.forms.stDresa, napaka = True)
+        st_dresa = request.forms.stDresa
+        imeZDresom = modeli.ime_igralca(st_dresa)
+        return template('dodaj_igralca', 
+                        st = st_dresa, 
+                        ime = imeZDresom,
+                        imeIgralca = request.forms.imeIgralca,
+                        pozicija = request.forms.pozicija,
+                        visina = request.forms.visina,
+                        teza = request.forms.teza,
+                        letoRojstva = request.forms.letoRojstva,
+                        napaka = True)
     redirect('/igralci/')
-
-@get('/naj_igralec/')
-def naj_igralec():
-    return template('naj_igralec')
 
 def ali_slika_obstaja(id):
     """ funkcija preveri, če fotografija obstaja na naslovu /static/id.png"""
     nekaj = os.path.exists("./static/" + str(id) + ".png")
     return nekaj
 
+
 @get('/najboljsi/')
 def najboljsi():
     ekipe = modeli.ekipe()
-    return template('najboljsi', seznamEkip = ekipe, stevec =1)
+    return template('najboljsi', seznamEkip = ekipe, stevec = 1)
 
 @post('/najboljsi/')
 def najboljsi_igralec():
     if request.forms.get("izbiraEkipe"):
         izbranaEkipa = request.forms.izbiraEkipe
         sezDatumov = modeli.poisci_datume(str(izbranaEkipa))
-        return template('najboljsi', ekipa = izbranaEkipa, seznamDatumov = sezDatumov,stevec = 2)
+        return template('najboljsi', ekipa = izbranaEkipa, seznamDatumov = sezDatumov, stevec = 2)
     elif request.forms.get("izbiraDatuma"):
         izbraniDatum = request.forms.izbiraDatuma
+        ekipa = modeli.poisci_nasprotnika(izbraniDatum)[0]
         najvecTock = list(modeli.najvec_tock(izbraniDatum))
         najvecPodaj = list(modeli.najvec_podaj(izbraniDatum))
         najvecSkokov = list(modeli.najvec_skoki(izbraniDatum))
@@ -133,11 +141,7 @@ def najboljsi_igralec():
         najvecPodaj.append(modeli.ime_igralca(najvecPodaj[0]))
         najvecSkokov.append(modeli.ime_igralca(najvecSkokov[0]))
         najvecUkradenih.append(modeli.ime_igralca(najvecUkradenih[0]))
-        return template('najboljsi', datum = izbraniDatum ,stevec = 3, najvecT = najvecTock,
+        return template('najboljsi', datum = izbraniDatum, stevec = 3, ekipa = ekipa, najvecT = najvecTock,
                         najvecP = najvecPodaj, najvecS = najvecSkokov, najvecU = najvecUkradenih)
-
-    
-#@post('/najboljsi/')
-#def najboljsi_igralec():
 
 run(host='localhost', port=8080, reloader=True, debug=True)

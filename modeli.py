@@ -54,6 +54,12 @@ def poisci_datume(imeNasprotnika):
     #Pretvorimo dobljene podatke v seznam
     return [podatek[0] for podatek in rez]
 
+def poisci_nasprotnika(datum):
+    """
+    Funkcija poišče ime naspreotne ekipe na ta datum
+    """
+    return conn.execute("SELECT opponent FROM tekme WHERE date = ?", [datum]).fetchone()
+
 def pridobi_podatke(id):
     """
     Vrne podatke o igralcu. Vemo zagotovo, da je igralec v ekipi
